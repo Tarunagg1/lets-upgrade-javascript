@@ -7,7 +7,7 @@ function init(){
         busarray = JSON.parse(localStorage.busrecord);
         busarray.forEach(element => {
             sno++
-            preparetable(element.Sno,element.Name,element.Source,element.Destination,element.Number,element.Passenger,element.Capacity)
+            preparetable(element.Sno,element.Name,element.Source,element.Destination,element.Number,element.Passenger)
         });
     }
 }
@@ -19,19 +19,18 @@ adddata.addEventListener('click', function (e) {
     let Destination = document.getElementById('Destination').value;
     let Number = document.getElementById('Number').value;
     let Passenger = document.getElementById('Passenger').value;
-    let Capacity = document.getElementById('Capacity').value;
 
     sno++;
-    var busobj = {"Sno":sno,"Name": Name, "Source": Source, "Destination": Destination, "Number": Number, "Passenger": Passenger, "Capacity": Capacity };
+    var busobj = {"Sno":sno,"Name": Name, "Source": Source, "Destination": Destination, "Number": Number, "Passenger": Passenger };
 
     busarray.push(busobj)
 
     localStorage.busrecord = JSON.stringify(busarray);
     cleartextbox();
-    preparetable(sno,Name,Source,Destination,Number,Passenger,Capacity);
+    preparetable(sno,Name,Source,Destination,Number,Passenger);
 })
 
-function preparetable(sno, name, source, destination, num, pess, capacity) {
+function preparetable(sno, name, source, destination, num, pess) {
     let table = document.getElementById("bustab");
     let row = table.insertRow();
     var cell0 = row.insertCell(0);
@@ -40,7 +39,6 @@ function preparetable(sno, name, source, destination, num, pess, capacity) {
     var cell3 = row.insertCell(3);
     var cell4 = row.insertCell(4);
     var cell5 = row.insertCell(5);
-    var cell6 = row.insertCell(6);
 
     cell0.innerHTML = sno;
     cell1.innerHTML = name;
@@ -48,7 +46,6 @@ function preparetable(sno, name, source, destination, num, pess, capacity) {
     cell3.innerHTML = destination;
     cell4.innerHTML = num;
     cell5.innerHTML = pess;
-    cell6.innerHTML = capacity;
 }
 
 
@@ -58,18 +55,7 @@ const cleartextbox = () => {
     document.getElementById('Destination').value = "";
     document.getElementById('Number').value = "";
     document.getElementById('Passenger').value = "";
-    document.getElementById('Capacity').value = "";
 }
-
-// search.addEventListener('click',()=>{
-//     ds = document.getElementById('searchSource').value.toLowerCase();
-//     dd = document.getElementById('searchDestination').value.toLowerCase();
-//     if(ds == "" || dd == ""){
-//         alert("Please Enter Source And Destination")
-//     }else{
-
-//     }
-// })
 
 
 const searchbyname = () => {
